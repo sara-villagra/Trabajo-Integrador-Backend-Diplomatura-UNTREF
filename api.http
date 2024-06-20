@@ -2,7 +2,7 @@
 GET http://localhost:3008
 ### Mostrar todos los accesorios
 
-GET http://localhost:3008/accesorios
+GET http://localhost:3008/computacion
 ### Mostrar un accesorio
 
 GET http://localhost:3008/accesorios/:id

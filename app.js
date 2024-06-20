@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 })
 //obtener todos los accesorios
 
-app.get('/accesorios', async (req, res) => {
+app.get('/computacion', async (req, res) => {
  const accesorios = await Accesorio.find()
  res.json(accesorios)
 })
