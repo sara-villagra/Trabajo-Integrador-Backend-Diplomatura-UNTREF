@@ -1,3 +1,10 @@
 ### Mostrar la pagina de inicio
 GET http://localhost:3008
+### Mostrar todos los accesorios
+
+GET http://localhost:3008/accesorios
+### Mostrar un accesorio
+
+GET http://localhost:3008/accesorios/:id
+### Borrar un accesorio
 
