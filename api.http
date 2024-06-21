@@ -6,5 +6,9 @@ GET http://localhost:3008/computacion
 ### Mostrar un accesorio
 
 GET http://localhost:3008/computacion/6674b8f3690515eecf9a08ae
-### Borrar un accesorio
+### filtar un accesorio por su nombre
+
+GET http://localhost:3008/computacion/nombre/la
+
+### filtar un accesorio por su marca
 

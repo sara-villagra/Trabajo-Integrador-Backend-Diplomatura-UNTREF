@@ -26,17 +26,34 @@ app.get('/computacion', (req, res) => {
    res.status(500).send(`Error al mostrar los accesorios,${error}`)
   })
 })
-//obtener accesorios por su id
+//obtener accesorios de computación por su id
 app.get('/computacion/:id', (req, res) => {
  Accesorio.findById(req.params.id)
   .then((accesorio) => {
-   res.json(accesorio)
+   res.status(200).json(accesorio)
   })
   .catch((error) => {
-   //console.error(`error al cargar los accesorios:`, error)
    res.status(500).send(`Error al mostrar los accesorios,${error}`)
   })
 })
+//Filtrar accesorios por su nombre (busqueda parcial)
+
+app.get('/computacion/nombre/:nombre', (req, res) => {
+ const { nombre } = req.params
+ if (!nombre) {
+  res.status(400).send('Debe ingresar un nombre')
+ } else {
+  Accesorio.find({ nombre: { $regex: `^${nombre}`, $options: 'i' } })
+   .then((accesorio) => {
+    res.status(200).json(accesorio)
+   })
+   .catch((error) => {
+    res.status(500).send(`Error al mostrar los accesorios,${error}`)
+   })
+ }
+})
+//Agregar un nuevo producto
+
 //Middleware para rutas no encontradas 404
 app.use((req, res) => {
  res.status(404).send('<h1>404 página no encontrada, =(</h1>')
