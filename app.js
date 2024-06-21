@@ -16,11 +16,31 @@ app.get('/', (req, res) => {
 })
 //obtener todos los accesorios
 
-app.get('/computacion', async (req, res) => {
- const accesorios = await Accesorio.find()
- res.json(accesorios)
+app.get('/computacion', (req, res) => {
+ Accesorio.find()
+  .then((accesorios) => {
+   res.json(accesorios)
+  })
+  .catch((error) => {
+   //console.error(`error al cargar los accesorios:`, error)
+   res.status(500).send(`Error al mostrar los accesorios,${error}`)
+  })
 })
-//obtener un accesorio
+//obtener accesorios por su id
+app.get('/computacion/:id', (req, res) => {
+ Accesorio.findById(req.params.id)
+  .then((accesorio) => {
+   res.json(accesorio)
+  })
+  .catch((error) => {
+   //console.error(`error al cargar los accesorios:`, error)
+   res.status(500).send(`Error al mostrar los accesorios,${error}`)
+  })
+})
+//Middleware para rutas no encontradas 404
+app.use((req, res) => {
+ res.status(404).send('<h1>404 página no encontrada, =(</h1>')
+})
 
 //Inicializamos el servidor
 app.listen(port, () => {
