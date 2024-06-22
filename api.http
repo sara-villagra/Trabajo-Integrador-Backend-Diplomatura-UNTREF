@@ -15,9 +15,9 @@ POST http://localhost:3008/computacion/
 content-type: application/json
 
 {
-    "codigo": 55,
+    "codigo": 58,
     "nombre": "Nuevo Producto",
-    "precio": 50000,
+    "precio": 1000,
     "categoria": "Smartphone"
    
 }

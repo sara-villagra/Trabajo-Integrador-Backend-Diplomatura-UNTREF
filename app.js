@@ -57,12 +57,12 @@ app.post('/computacion/', (req, res) => {
  const componente = new Accesorio(req.body)
  console.log(componente)
  if (!componente) {
-  res.status(400).send('Debe ingresar los datos del componente')
+  res.status(400).json({ message: 'Debe agregar un accesorio' })
  } else {
   componente
    .save()
    .then((componente) => {
-    res.json(componente)
+    res.status(200).json({ message: 'Posteo hecho con exito', componente })
    })
    .catch((error) => {
     console.error('Error al crear el componente: ', error)
