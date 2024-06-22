@@ -70,7 +70,24 @@ app.post('/computacion/', (req, res) => {
    })
  }
 })
-
+//Modificar el precio de un producto:
+app.patch('/computacion/:id', (req, res) => {
+ const { id } = req.params
+ Accesorio.findByIdAndUpdate(id, req.body, {
+  new: true
+ })
+  .then((componente) => {
+   if (componente) {
+    res.status(200).json(componente)
+   } else {
+    res.status(404).send('El componente no existe')
+   }
+  })
+  .catch((error) => {
+   console.error('Error al actualizar el componente: ', error)
+   res.status(500).send('Error al actualizar el componente')
+  })
+})
 //Middleware para rutas no encontradas 404
 app.use((req, res) => {
  res.status(404).send('<h1>404 página no encontrada, =(</h1>')

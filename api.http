@@ -21,3 +21,10 @@ content-type: application/json
     "categoria": "Smartphone"
    
 }
+### Modificar/Actualizar un producto parcialmente
+PATCH http://localhost:3008/computacion/6674b8f3690515eecf9a08b6
+content-type: application/json
+
+{
+    "precio": 200000
+}

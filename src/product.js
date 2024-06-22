@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const accesoriosSchema = new mongoose.Schema({
  //title: String,
+
  codigo: Number,
  nombre: String,
  precio: Number,
