@@ -52,7 +52,24 @@ app.get('/computacion/nombre/:nombre', (req, res) => {
    })
  }
 })
-//Agregar un nuevo producto
+//agregar un nuevo producto:
+app.post('/computacion/', (req, res) => {
+ const componente = new Accesorio(req.body)
+ console.log(componente)
+ if (!componente) {
+  res.status(400).send('Debe ingresar los datos del componente')
+ } else {
+  componente
+   .save()
+   .then((componente) => {
+    res.json(componente)
+   })
+   .catch((error) => {
+    console.error('Error al crear el componente: ', error)
+    res.status(500).send('Error al crear el componente')
+   })
+ }
+})
 
 //Middleware para rutas no encontradas 404
 app.use((req, res) => {

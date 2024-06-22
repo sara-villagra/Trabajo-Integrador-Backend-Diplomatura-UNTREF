@@ -10,5 +10,14 @@ GET http://localhost:3008/computacion/6674b8f3690515eecf9a08ae
 
 GET http://localhost:3008/computacion/nombre/la
 
-### filtar un accesorio por su marca
+### Agregar un nuevo producto
+POST http://localhost:3008/computacion/
+content-type: application/json
 
+{
+    "codigo": 55,
+    "nombre": "Nuevo Producto",
+    "precio": 50000,
+    "categoria": "Smartphone"
+   
+}
