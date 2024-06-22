@@ -28,3 +28,7 @@ content-type: application/json
 {
     "precio": 200000
 }
+### Eliminar un producto
+
+DELETE http://localhost:3008/computacion/66761b38d32f37e2968f3179
+### Mostrar todos los productos

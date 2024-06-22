@@ -88,6 +88,22 @@ app.patch('/computacion/:id', (req, res) => {
    res.status(500).send('Error al actualizar el componente')
   })
 })
+//Borrar un producto por si id
+app.delete('/computacion/:id', (req, res) => {
+ const { id } = req.params
+ Accesorio.findByIdAndDelete(id)
+  .then((componente) => {
+   if (componente) {
+    res.status(200).json(componente)
+   } else {
+    res.status(404).send('El componente no existe')
+   }
+  })
+  .catch((error) => {
+   console.error('Error al borrar el componente: ', error)
+   res.status(500).send('Error al borrar el componente')
+  })
+})
 //Middleware para rutas no encontradas 404
 app.use((req, res) => {
  res.status(404).send('<h1>404 página no encontrada, =(</h1>')
