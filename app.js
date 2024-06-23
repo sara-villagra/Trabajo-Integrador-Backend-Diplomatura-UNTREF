@@ -13,6 +13,22 @@ connectDB()
 app.use(express.json())
 app.use(morgan('dev'))
 
+// Middleware para verificar el token JWT
+const verifyToken = (req, res, next) => {
+ const token = req.headers['authorization']
+ if (!token)
+  return res.status(401).json({
+   error:
+    'Usuario no autentificado, logearse y obtener token de seguridad para continuar'
+  })
+ // Verificación del token
+ jwt.verify(token, secretKey, (err, decoded) => {
+  err
+   ? res.status(401).json({ error: 'Invalid token' })
+   : (req.decoded = decoded)
+  next()
+ })
+}
 //Ruta principal
 app.get('/', (req, res) => {
  res.send('Bienvenido a la API de Accesorios de Computación!')
@@ -68,15 +84,18 @@ app.post('/login', (req, res) => {
   console.log(user)
   if (user) {
    const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' })
-   return res.status(200).json({ token })
+   return res.status(200).json({
+    message: 'Guarda el siguiente token. Será solicitado para rutas protegidas',
+    token
+   })
   } else {
    res.status(401).send('Usuario o contraseña incorrectos')
   }
  })
 })
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkZhYmlvIEFyZ2HDsWFyYXoiLCJpYXQiOjE3MTkxMDM2NDAsImV4cCI6MTcxOTEwNzI0MH0.oTY1IWwdcpuoJShkuieXj_Befzo3K_qS8osAmUNV3Eo
+
 //agregar un nuevo producto:
-app.post('/computacion/', (req, res) => {
+app.post('/computacion/', verifyToken, (req, res) => {
  const componente = new Accesorio(req.body)
  console.log(componente)
  if (!componente) {
@@ -94,7 +113,7 @@ app.post('/computacion/', (req, res) => {
  }
 })
 //Modificar el precio de un producto:
-app.patch('/computacion/:id', (req, res) => {
+app.patch('/computacion/:id', verifyToken, (req, res) => {
  const { id } = req.params
  Accesorio.findByIdAndUpdate(id, req.body, {
   new: true
@@ -112,7 +131,7 @@ app.patch('/computacion/:id', (req, res) => {
   })
 })
 //Borrar un producto por si id
-app.delete('/computacion/:id', (req, res) => {
+app.delete('/computacion/:id', verifyToken, (req, res) => {
  const { id } = req.params
  Accesorio.findByIdAndDelete(id)
   .then((componente) => {

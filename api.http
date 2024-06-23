@@ -12,10 +12,11 @@ GET http://localhost:3008/computacion/nombre/la
 
 ### Agregar un nuevo producto
 POST http://localhost:3008/computacion/
+Authorization: ####agregar tu token######
 content-type: application/json
 
 {
-    "codigo": 58,
+    "codigo": 77,
     "nombre": "Nuevo Producto",
     "precio": 1000,
     "categoria": "Smartphone"
@@ -23,6 +24,7 @@ content-type: application/json
 }
 ### Modificar/Actualizar un producto parcialmente
 PATCH http://localhost:3008/computacion/6674b8f3690515eecf9a08b6
+Authorization: ####agregar tu token######
 content-type: application/json
 
 {
@@ -31,12 +33,13 @@ content-type: application/json
 ### Eliminar un producto
 
 DELETE http://localhost:3008/computacion/66761b38d32f37e2968f3179
+Authorization: ####agregar tu token######
 
-### Login
+### Login y obtener token
 POST http://localhost:3008/login
 Content-Type: application/json
 
 {
-    "username": "Fabio Argañaraz",
-    "password": "FaBAHalt4ndC@tchF1r3"
+    "username": "username",
+    "password": "password"
 }
