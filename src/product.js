@@ -9,4 +9,5 @@ const accesoriosSchema = new mongoose.Schema({
  categoria: String
 })
 const Accesorio = mongoose.model('accesorio', accesoriosSchema)
+
 module.exports = Accesorio

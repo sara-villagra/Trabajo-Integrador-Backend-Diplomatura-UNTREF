@@ -31,4 +31,12 @@ content-type: application/json
 ### Eliminar un producto
 
 DELETE http://localhost:3008/computacion/66761b38d32f37e2968f3179
-### Mostrar todos los productos
+
+### Login
+POST http://localhost:3008/login
+Content-Type: application/json
+
+{
+    "username": "Fabio Argañaraz",
+    "password": "FaBAHalt4ndC@tchF1r3"
+}

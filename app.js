@@ -2,9 +2,12 @@ const express = require('express')
 const app = express()
 const connectDB = require('./src/database')
 process.loadEnvFile()
+const jwt = require('jsonwebtoken')
+const secretKey = process.env.SECRET_KEY
 const port = process.env.PORT ?? 3000
 const morgan = require('morgan')
 const Accesorio = require('./src/product')
+const User = require('./src/user')
 connectDB()
 //Middleware
 app.use(express.json())
@@ -12,7 +15,7 @@ app.use(morgan('dev'))
 
 //Ruta principal
 app.get('/', (req, res) => {
- res.send('Bienvenido a la API de Accesorios de Computación !')
+ res.send('Bienvenido a la API de Accesorios de Computación!')
 })
 //obtener todos los accesorios
 
@@ -52,6 +55,26 @@ app.get('/computacion/nombre/:nombre', (req, res) => {
    })
  }
 })
+// Login de usuario donde se genera el JWT de seguridad
+//para rutas seguras
+app.post('/login', (req, res) => {
+ const { username, password } = req.body
+ console.log(`Datos recibidos: usuario: ${username}, password: ${password}`)
+ //  //Autenticacion del usuario
+ User.find({
+  username: { $regex: username, $options: 'i' },
+  password: { $regex: password, $options: 'i' }
+ }).then((user) => {
+  console.log(user)
+  if (user) {
+   const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' })
+   return res.status(200).json({ token })
+  } else {
+   res.status(401).send('Usuario o contraseña incorrectos')
+  }
+ })
+})
+// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkZhYmlvIEFyZ2HDsWFyYXoiLCJpYXQiOjE3MTkxMDM2NDAsImV4cCI6MTcxOTEwNzI0MH0.oTY1IWwdcpuoJShkuieXj_Befzo3K_qS8osAmUNV3Eo
 //agregar un nuevo producto:
 app.post('/computacion/', (req, res) => {
  const componente = new Accesorio(req.body)
