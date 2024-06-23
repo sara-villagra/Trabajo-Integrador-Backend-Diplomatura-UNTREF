@@ -1,5 +1,5 @@
 # Proyecto Integrador: CRUD con Node.js y MongoDB
-Sara
+**SARA VILLAGRA**
 ## Descripción del Proyecto
 
 En este proyecto, desarrollarás una aplicación basada en Node.js y MongoDB que permita realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en una base de datos. La base de datos MongoDB deberá estar generada en el clúster de mongodb.com y tu aplicación Node.js se conectará a ella.
@@ -9,11 +9,8 @@ Podrás usar alguno de los datasets JSON proporcionados, o crear uno propio que 
 ## Datasets Proporcionados
 
 - **computacion.json**: Productos de computación, partes, accesorios y repuestos.
-- **electronicos.json**: Productos electrónicos de consumo.
-- **granjas.json**: Frutas y verduras.
-- **mobiliario.json**: Muebles de hogar y oficina.
-- **prendas.json**: Prendas de vestir.
-- **supermercado.json**: Productos de supermercado.
+- **usuario.json**: usuarios varios.
+
 
 ## Funcionalidades del CRUD
 
@@ -47,63 +44,39 @@ Podrás usar alguno de los datasets JSON proporcionados, o crear uno propio que 
    - Respuesta adecuada con mensajes y códigos de error específicos.
    - Control de acceso a rutas no existentes con respuestas apropiadas.
 
-## Fechas Importantes
 
-- **Avance del Proyecto**: 11 de julio de 2024
-  - Tener listos los endpoints básicos, el control de rutas inexistentes, la conexión con MongoDB y los métodos GET funcionando.
 
-- **Presentación Final**: 30 de julio de 2024
-  - Proyecto 100% funcional.
+
 
 ## Estructura del Repositorio
 
 ```plaintext
-/json
+/TRABAJO-INTEGRADOR-BACKEND-DIPLOMATURA-UNTREF
+ /json
   - computacion.json
-  - electronicos.json
-  - granjas.json
-  - mobiliario.json
-  - prendas.json
-  - supermercado.json
-/README.md
-/app.js
-/database.js
-/product.js
+  - usuarios.json
+ /src
+  - database.js
+  - product.js
+  - user.js
+ .gitignore
+ api.http
+ README.md
+ app.js
+
 ```
 
 ### Descripción de Archivos
 
-- **/json**: Carpeta que contiene los datasets JSON.
+- **/json**: Carpeta que contiene 2 archivos JSON.
 - **/README.md**: Archivo con la descripción del proyecto.
 - **/app.js**: Archivo principal de la aplicación Node.js donde se define toda la lógica de rutas y la conexión a la base de datos.
 - **/database.js**: Archivo para configurar la conexión a la base de datos MongoDB.
 - **/product.js**: Archivo que contiene el esquema (schema) del producto utilizando Mongoose.
 
-## Instrucciones de Entrega
+## Instrucciones :
 
-1. **Fork** el repositorio desde [aquí](https://github.com/FabioDrizZt/Trabajo-Integrador-Backend-Diplomatura-UNTREF/fork).
-2. **Clona** tu fork en tu máquina local.
-   ```bash
-   git clone https://github.com/tu-usuario/tu-repositorio-fork.git
-   ```
-3. Realiza los cambios y sube tu código a tu fork.
-4. **Sube** los cambios a tu fork.
-   ```bash
-   git add .
-   git commit -m "Descripción de los cambios"
-   git push origin main
-   ```
-
-5. Agrega a los siguientes usuarios como colaboradores en tu repositorio:
-   - [FabioDrizZt](https://github.com/FabioDrizZt)
-   - [JuanNebbia](https://github.com/JuanNebbia)
-   - [NKrein](https://github.com/NKrein)
-   - [mathiasbarbosa](https://github.com/mathiasbarbosa)
 
 ## Conclusión
 
-Este proyecto te permitirá aplicar tus conocimientos en desarrollo backend con Node.js y MongoDB, implementando un CRUD completo con control de errores y buenas prácticas. ¡Buena suerte y adelante con el desarrollo!
-
----
-
-Recuerda mantener tu código limpio, documentado y seguir las buenas prácticas de desarrollo. ¡Nos vemos en clase para revisar tu progreso el 11 de julio de 2024!
+Este proyecto te permitirá aplicar tus conocimientos en desarrollo backend con Node.js y MongoDB, implementando un CRUD completo con control de errores y buenas prácticas. ¡
