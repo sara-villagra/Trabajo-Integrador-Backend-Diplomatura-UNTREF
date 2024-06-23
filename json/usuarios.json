@@ -1,0 +1,57 @@
+[
+    {
+     "id": 1,
+     "username": "Cameron",
+     "email": "cameron.howe@mutiny.com",
+     "password": "CaH@lt4ndC4tchFire"
+    },
+    {
+     "id": 2,
+     "username": "Donna",
+    "email": "donna.clark@mutiny.com",
+    "password": "H@ltAndC@tchF1r3"
+    },
+    {
+     "id": 3,
+     "username": "Joe",
+     "email": "joe.macmillan@mutiny.com",
+     "password": "JoeH@ltNc4tchF1r353"
+    },
+    {
+     "id": 4,
+     "username": "Gordon",
+     "email": "gordon.clark@mutiny.com",
+     "password": "GorH@lt4ndC@tchF1r3"
+    },
+    {
+     "id": 5,
+     "username":"Bosworth",
+     "email": "john.bosworth@mutiny.com",
+     "password": "BosHalt4ndC@tchF1r3"
+    },
+    {
+     "id": 6,
+     "username": "Matias Barbosa",
+     "email": "Mabosworth@mutiny.com",
+     "password": "MaosHalt4ndC@tchF1r3"
+    },
+    {
+     "id": 7,
+     "username": "Nicolas Krein",
+     "email": "Nico.bosworth@mutiny.com",
+     "password": "NickHalt4ndC@tchF1r3"
+    },
+    {
+     "id": 8,
+    "username": "Fabio Argañaraz",
+     "email": "FaBbosworth@mutiny.com",
+     "password": "FaBAHalt4ndC@tchF1r3"
+    },
+    {
+     "id": 9,
+     "username": "Juan Nebbia",
+     "email": "jAn.bosworth@mutiny.com",
+     "password": "JNsHalt4ndC@tchF1r3"
+    }
+   ]
+   
