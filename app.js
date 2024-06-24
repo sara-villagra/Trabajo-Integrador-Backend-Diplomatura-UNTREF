@@ -13,13 +13,13 @@ connectDB()
 app.use(express.json())
 app.use(morgan('dev'))
 
-// Middleware para verificar el token JWT
+// Middleware para verificar  token JWT
 const verifyToken = (req, res, next) => {
  const token = req.headers['authorization']
  if (!token)
   return res.status(401).json({
    error:
-    'Usuario no autentificado, logearse y obtener token de seguridad para continuar'
+    'Usuario no autentificado, deberá loguearse y obtener token de seguridad para continuar'
   })
  // Verificación del token
  jwt.verify(token, secretKey, (err, decoded) => {

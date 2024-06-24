@@ -1,52 +1,17 @@
 # Proyecto Integrador: CRUD con Node.js y MongoDB
-**SARA VILLAGRA**
+
+
+
 ## Descripción del Proyecto
 
-En este proyecto, desarrollarás una aplicación basada en Node.js y MongoDB que permita realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en una base de datos. La base de datos MongoDB deberá estar generada en el clúster de mongodb.com y tu aplicación Node.js se conectará a ella.
+En este proyecto, desarrolla una aplicación basada en Node.js, express, MongoDB, que permita realizar operaciones CRUD (Crear, Leer, Actualizar, Eliminar) en una base de datos correspondiente a accesorios de computación y  usuarios registrados con control de errores.
+Se agregó librerias como dependencias para  optimizar su funcionalidad, como Mongoose, Morgan y JWT.  
+Se implementó autenticación y autorización para que solo los usuarios autenticados puedan realizar operaciones sobre rutas protegidas.
 
-Podrás usar alguno de los datasets JSON proporcionados, o crear uno propio que contenga entre 20 y 30 productos, distribuidos en varias categorías.
-
-## Datasets Proporcionados
-
-- **computacion.json**: Productos de computación, partes, accesorios y repuestos.
-- **usuario.json**: usuarios varios.
-
-
-## Funcionalidades del CRUD
-
-1. **Obtener todos los productos**
-   - Endpoint para leer todos los productos de la colección.
-   - Control de errores para manejar la indisponibilidad de la base de datos.
-
-2. **Obtener un producto**
-   - Endpoint para obtener un producto por su ID.
-   - Control de errores para manejar casos en que el producto no se encuentre o la base de datos no esté disponible.
-
-3. **Filtrar productos**
-   - Endpoint para filtrar productos por nombre (búsqueda parcial).
-   - Control de errores para manejar coincidencias no encontradas o problemas de conexión.
-
-4. **Agregar un nuevo producto**
-   - Endpoint para agregar un nuevo producto.
-   - Validación y control de errores.
-   - Generación de un código numérico para el nuevo producto.
-
-5. **Modificar el precio de un producto**
-   - Endpoint para cambiar el precio de un producto usando PATCH.
-   - Control de errores para manejar problemas durante la actualización.
-     
-6. **Borrar un producto**
-   - Endpoint para borrar un producto usando DELETE.
-   - Control de errores para manejar problemas durante el borrado.
-
-7. **Control de errores**
-   - Manejo de errores en la estructura de las solicitudes y respuestas.
-   - Respuesta adecuada con mensajes y códigos de error específicos.
-   - Control de acceso a rutas no existentes con respuestas apropiadas.
-
-
-
-
+## Datos JSON Proporcionados
+Se agrego dentro de la carpeta json dos archivos correspondiente a los datos se los accesorios de computación y de los usuarios registrados. Podrás utilizarla para crear la base de datos con dos colecciones dentro.Una para los accesorios y otra para los usuarios.
+- **computacion.json**: Productos de computación, partes y accesorios.
+- **usuario.json**: Usuarios varios registrados.
 
 ## Estructura del Repositorio
 
@@ -59,24 +24,66 @@ Podrás usar alguno de los datasets JSON proporcionados, o crear uno propio que 
   - database.js
   - product.js
   - user.js
+ .env_copy
  .gitignore
  api.http
  README.md
  app.js
 
 ```
-
-### Descripción de Archivos
+### Descripción de Archivos y carpetas
 
 - **/json**: Carpeta que contiene 2 archivos JSON.
-- **/README.md**: Archivo con la descripción del proyecto.
-- **/app.js**: Archivo principal de la aplicación Node.js donde se define toda la lógica de rutas y la conexión a la base de datos.
-- **/database.js**: Archivo para configurar la conexión a la base de datos MongoDB.
-- **/product.js**: Archivo que contiene el esquema (schema) del producto utilizando Mongoose.
+- **README.md**: Archivo con la descripción del proyecto.
+- **app.js**: Archivo principal de la aplicación Node.js donde se define toda la lógica de rutas 
+- **/src**: Carpeta que contiene 3 archivos para la conexion y para armar el schema de los productos y de los usuarios.
+- **database.js**: Archivo que contiene la conexión a la base de datos MongoDB.
+- **product.js**: Archivo que contiene el esquema (schema) del producto.
+- **user.js**: Archivo que contiene el esquema (schema) de los usuarios.
+- **.env_copy**: Archivo que contiene las variables de entorno.
+- **.gitignore**: Archivo que indica qué archivos o carpetas no se deben incluir
+- **api.http**: Archivo que contiene las rutas de la API.
+
+## Environment Variables
+Para correr este proyecto, deberás modificar el archivo .env_copy por .env.
+En  la cadena de conexión  MONGODB_URLSTRING , colocar tu usuario y password correspondiente al cluster generado en MongoDB
+ejemplo:
+MONGODB_URLSTRING='mongodb+srv://(usuario):(contraseña)@cluster0.......>'
+En caso de no tener usuario y password, regístrate en:
+- https://www.mongodb.com/
+- Crear un cluster
+- Crear un usuario y contraseña
+
+DATABASE_NAME = agregar nombre de la base de datos de MongoDB Compass.
+COLLECTION_NAME = agregar nombre de la colección.
+SECRET_KEY= clave secreta para obtener y validar JWT.
+PORT= puerto de la aplicación.
+
+## Funcionalidades del CRUD
+En el archivo api.http se puede realizar las operaciones CRUD y verificar la funcionalidad. Para:
+
+- **GET /**: Obtener ruta principal.
+- **GET /computacion**: Obtener todos los productos.
+- **GET /computacion/:id**: Obtener un producto por su ID.
+ **GET /computacion/nombre/:nombre**: Obtener un producto por su ID.
+- **POST /computacion**: Crear un nuevo producto, ruta protegida.Agregar token de autentificación.
+- **PATCH /computacion/:id**: Modificar el precio de un producto.Ruta protegida
+- **DELETE /computacion/:id**: Eliminar un producto. Ruta protegida
+- **POST /login**: Realizar el Login y obtener token para validar usuario y acceder a rutas protegidas.
 
 ## Instrucciones :
+inicializar el proyecto :
+- npm init -y
+Agregar las siguientes dependencias:
+- npm i express mongoose morgan
+- npm i jsonwebtoken
+Agregar en los script de archivo package.json
+- "start": "node  -- watch app.js"
+Ejecutar el proyecto en terminal
+- npm start
+Abrir en el navegador :
+- http://localhost:3008/
 
+## Autor
+- https://github.com/sara-villagra
 
-## Conclusión
-
-Este proyecto te permitirá aplicar tus conocimientos en desarrollo backend con Node.js y MongoDB, implementando un CRUD completo con control de errores y buenas prácticas. ¡
