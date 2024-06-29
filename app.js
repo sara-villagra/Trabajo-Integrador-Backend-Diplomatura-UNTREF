@@ -33,15 +33,18 @@ const verifyToken = (req, res, next) => {
 app.get('/', (req, res) => {
  res.send('Bienvenido a la API de Accesorios de Computación!')
 })
-//obtener todos los accesorios
 
+//obtener todos los accesorios
 app.get('/computacion', (req, res) => {
  Accesorio.find()
   .then((accesorios) => {
-   res.json(accesorios)
+   if (accesorios) {
+    res.json(accesorios)
+   } else {
+    res.status(404).send('No se encontraron accesorios')
+   }
   })
   .catch((error) => {
-   //console.error(`error al cargar los accesorios:`, error)
    res.status(500).send(`Error al mostrar los accesorios,${error}`)
   })
 })
@@ -49,14 +52,19 @@ app.get('/computacion', (req, res) => {
 app.get('/computacion/:id', (req, res) => {
  Accesorio.findById(req.params.id)
   .then((accesorio) => {
-   res.status(200).json(accesorio)
+   if (!accesorio) {
+    return res
+     .status(404)
+     .send(`No se encontró el accesorio con ese id: ${accesorio}`)
+   }
+   res.json(accesorio)
   })
   .catch((error) => {
    res.status(500).send(`Error al mostrar los accesorios,${error}`)
   })
 })
-//Filtrar accesorios por su nombre (busqueda parcial)
 
+//Filtrar accesorios por su nombre (busqueda parcial)
 app.get('/computacion/nombre/:nombre', (req, res) => {
  const { nombre } = req.params
  if (!nombre) {
@@ -64,7 +72,7 @@ app.get('/computacion/nombre/:nombre', (req, res) => {
  } else {
   Accesorio.find({ nombre: { $regex: `^${nombre}`, $options: 'i' } })
    .then((accesorio) => {
-    res.status(200).json(accesorio)
+    res.json(accesorio)
    })
    .catch((error) => {
     res.status(500).send(`Error al mostrar los accesorios,${error}`)
@@ -75,23 +83,27 @@ app.get('/computacion/nombre/:nombre', (req, res) => {
 //para rutas seguras
 app.post('/login', (req, res) => {
  const { username, password } = req.body
- console.log(`Datos recibidos: usuario: ${username}, password: ${password}`)
- //  //Autenticacion del usuario
+ //Autenticacion del usuario
  User.find({
   username: { $regex: username, $options: 'i' },
   password: { $regex: password, $options: 'i' }
- }).then((user) => {
-  console.log(user)
-  if (user) {
-   const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' })
-   return res.status(200).json({
-    message: 'Guarda el siguiente token. Será solicitado para rutas protegidas',
-    token
-   })
-  } else {
-   res.status(401).send('Usuario o contraseña incorrectos')
-  }
  })
+  .then((user) => {
+   //console.log(user)
+   if (user) {
+    const token = jwt.sign({ username }, secretKey, { expiresIn: '1h' })
+    return res.json({
+     message:
+      'Guarda el siguiente token. Será solicitado para rutas protegidas',
+     token
+    })
+   } else {
+    res.status(401).send('Usuario o contraseña incorrectos')
+   }
+  })
+  .catch((error) => {
+   res.status(500).send(`Error al autenticar el usuario, ${error}`)
+  })
 })
 
 //agregar un nuevo producto:
@@ -107,8 +119,8 @@ app.post('/computacion/', verifyToken, (req, res) => {
     res.status(200).json({ message: 'Posteo hecho con exito', componente })
    })
    .catch((error) => {
-    console.error('Error al crear el componente: ', error)
-    res.status(500).send('Error al crear el componente')
+    //console.error('Error al crear el componente: ', error)
+    res.status(500).send(`Error al crear el componente, ${error}`)
    })
  }
 })
@@ -120,7 +132,7 @@ app.patch('/computacion/:id', verifyToken, (req, res) => {
  })
   .then((componente) => {
    if (componente) {
-    res.status(200).json(componente)
+    res.json(componente)
    } else {
     res.status(404).send('El componente no existe')
    }
@@ -142,8 +154,7 @@ app.delete('/computacion/:id', verifyToken, (req, res) => {
    }
   })
   .catch((error) => {
-   console.error('Error al borrar el componente: ', error)
-   res.status(500).send('Error al borrar el componente')
+   res.status(500).send(`Error al borrar el componente, ${error}`)
   })
 })
 //Middleware para rutas no encontradas 404
