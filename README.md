@@ -32,7 +32,7 @@ Se implementó autenticación y autorización para que solo los usuarios autenti
 - **/src**: Carpeta que contiene 3 archivos para la conexion, armar el schema de los productos y de los usuarios.
 - **database.js**: Archivo que contiene la conexión a la base de datos MongoDB.
 - **product.js**: Archivo que contiene el esquema (schema) del producto.
-- **user.js**: Archivo que contiene el esquema (schema) de los usuarios.
+- **user.js**: Archivo que contiene el esquema (schema) de los usuarios predeterminados.
 - **.env_copy**: Archivo que contiene las variables de entorno.
 - **.gitignore**: Archivo que indica qué archivos o carpetas no se deben incluir
 - **api.http**: Archivo que contiene las rutas de la API.
@@ -47,7 +47,7 @@ En el archivo api.http se puede realizar las operaciones CRUD y verificar la fun
 - **POST /computacion**: Crear un nuevo producto, ruta protegida.Agregar token de autentificación.
 - **PATCH /computacion/:id**: Modificar el precio de un producto.Ruta protegida
 - **DELETE /computacion/:id**: Eliminar un producto. Ruta protegida
-- **POST /login**: Realizar el Login y obtener token para validar usuario y acceder a rutas protegidas.
+- **POST /login**: Realizar el Login y obtener token para validar usuario predeterminado y acceder a rutas protegidas.
 
 **IMPORTANTE**
 - Realizar el Login y obtener token para validar usuario y acceder a rutas protegidas.
