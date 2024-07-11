@@ -9,6 +9,8 @@ const morgan = require('morgan')
 const Accesorio = require('./src/product')
 const User = require('./src/user')
 connectDB()
+
+app.disable('x-powered-by')
 //Middleware
 app.use(express.json())
 app.use(morgan('dev'))
