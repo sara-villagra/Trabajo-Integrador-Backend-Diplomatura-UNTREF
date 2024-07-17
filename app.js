@@ -36,19 +36,34 @@ app.get('/', (req, res) => {
  res.send('Bienvenido a la API de Accesorios de Computación!')
 })
 
-//obtener todos los accesorios
+//obtener todos los accesorios o por genero
 app.get('/computacion', (req, res) => {
- Accesorio.find()
+ const { categoria } = req.query
+ const query = !categoria
+  ? {}
+  : { categoria: { $regex: categoria, $options: 'i' } }
+ Accesorio.find(query)
   .then((accesorios) => {
-   if (accesorios) {
-    res.json(accesorios)
+   if (!accesorios) {
+    return res.status(404).send('No se encontraron accesorios')
    } else {
-    res.status(404).send('No se encontraron accesorios')
+    res.json(accesorios)
    }
   })
   .catch((error) => {
    res.status(500).send(`Error al mostrar los accesorios,${error}`)
   })
+ //  Accesorio.find()
+ //   .then((accesorios) => {
+ //    if (accesorios) {
+ //     res.json(accesorios)
+ //    } else {
+ //     res.status(404).send('No se encontraron accesorios')
+ //    }
+ //   })
+ //   .catch((error) => {
+ //    res.status(500).send(`Error al mostrar los accesorios,${error}`)
+ //   })
 })
 //obtener accesorios de computación por su id
 app.get('/computacion/:id', (req, res) => {

@@ -1,13 +1,16 @@
 ### Mostrar la pagina de inicio
 GET http://localhost:3008
+
 ### Mostrar todos los accesorios
-
 GET http://localhost:3008/computacion
-### Mostrar un accesorio
 
-GET http://localhost:3008/computacion/6674b8f3690515eecf9a08ae
-### filtar un accesorio por su nombre
+### Mostrar accesorio por categoria
+GET http://localhost:3008/computacion?categoria=Accesorios
 
+### Mostrar un accesorio por su id
+GET http://localhost:3008/computacion/6674b8f3690515eecf9a08ad
+
+### Filtar un accesorio por su nombre
 GET http://localhost:3008/computacion/nombre/la
 
 ### Agregar un nuevo producto
@@ -30,8 +33,8 @@ content-type: application/json
 {
     "precio": 200000
 }
-### Eliminar un producto
 
+### Eliminar un producto
 DELETE http://localhost:3008/computacion/66761b38d32f37e2968f3179
 Authorization: ####agregar tu token######
 
