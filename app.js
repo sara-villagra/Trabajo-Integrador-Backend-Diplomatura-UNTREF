@@ -36,7 +36,7 @@ app.get('/', (req, res) => {
  res.send('Bienvenido a la API de Accesorios de Computación!')
 })
 
-//obtener todos los accesorios o por genero
+//obtener todos los accesorios o por categoria
 app.get('/computacion', (req, res) => {
  const { categoria } = req.query
  const query = !categoria
@@ -53,17 +53,6 @@ app.get('/computacion', (req, res) => {
   .catch((error) => {
    res.status(500).send(`Error al mostrar los accesorios,${error}`)
   })
- //  Accesorio.find()
- //   .then((accesorios) => {
- //    if (accesorios) {
- //     res.json(accesorios)
- //    } else {
- //     res.status(404).send('No se encontraron accesorios')
- //    }
- //   })
- //   .catch((error) => {
- //    res.status(500).send(`Error al mostrar los accesorios,${error}`)
- //   })
 })
 //obtener accesorios de computación por su id
 app.get('/computacion/:id', (req, res) => {
